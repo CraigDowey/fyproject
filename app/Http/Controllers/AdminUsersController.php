@@ -8,6 +8,7 @@ use App\Photo;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests;
 
@@ -59,7 +60,7 @@ class AdminUsersController extends Controller
 
             $input = $request->all();
 
-            $input['password'] = bycrypt($request->password);
+            $input['password'] = bcrypt($request->password);
 
         }
 
@@ -133,7 +134,7 @@ class AdminUsersController extends Controller
 
             $input = $request->all();
 
-            $input['password'] = bycrypt($request->password);
+            $input['password'] = bcrypt($request->password);
 
         }
 
@@ -164,8 +165,18 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //look into unlink at later date?
 
         $user = User::findOrFail($id);
+
+        unlink(public_path() . $user->photo->file);
+
+        $user->delete();
+
+        Session::flash('deleted_user', 'The User has been Deleted');
+
+        return redirect('/admin/users');
+
+
     }
 }
