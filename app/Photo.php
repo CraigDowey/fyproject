@@ -8,7 +8,7 @@ class Photo extends Model
 {
     //look into uploads link?
 
-    protected $uploads = 'http://localhost/fyproject/public/images/';
+    protected $uploads = '\images\\';
 
     protected $fillable = ['file'];
 
