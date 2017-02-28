@@ -34,7 +34,7 @@
             <td><img height="50" src="{{$user->photo ? $user->photo->file : '/images/imagename.php/400x400'}}" ></td>
             <td><a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a> </td>
             <td>{{$user->email}}</td>
-            <td>{{$user->role_id}}</td>
+            <td>{{$user->role? $user->role->name : 'No Role'}}</td>
             <td>{{$user->is_active == 1 ? 'Active' : 'Not Active'}}</td>
             <td>{{$user->created_at->diffForHumans()}}</td>
             <td>{{$user->updated_at->diffForHumans()}}</td>
